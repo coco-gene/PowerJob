@@ -1,0 +1,66 @@
+version: '3'
+services:
+  pumpkinjob-mysql80:
+    image: mysql:8.0
+    container_name: pumpkinjob--mysql
+    ports:
+      - "3306:3306"
+    command:
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+      --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./db/conf.d:/etc/mysql/conf.d
+      - ./db/data:/var/lib/mysql
+      - ./db/init-sql:/docker-entrypoint-initdb.d
+    networks:
+      - pumpkinjob
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+  pumpkinjob-mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - "./data/configdb:/data/configdb"
+      - "./data/db:/data/db"
+    networks:
+      - pumpkinjob
+    command: mongod --auth
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root       #初始化管理员用户名和密码
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    tty: true
+  pumpkinjob-mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    networks:
+      - pumpkinjob
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+  pumpkinjob:
+    build:
+      context: pumpkinjob-fe
+      dockerfile: Dockerfile
+    container_name: pumpkinjob-fe
+    ports:
+      - "7700:7700"
+      - "10086:10086"
+      - "10010:10010"
+    volumes:
+      - ./pumpkinjob/powerjob:/home/pumpkinjob/powerjob
+      - /etc/localtime:/etc/localtime
+    networks:
+      - pumpkinjob
+    depends_on:
+      - pumpkinjob-mysql80
+      - pumpkinjob-mongodb
+    restart: always
+
+networks:
+  pumpkinjob:
+    driver: bridge
