@@ -47,10 +47,7 @@ services:
     networks:
       - pumpkinjob
     environment:
-      ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
-    links:
-      - pumpkinjob-mongodb:mongo
+      ME_CONFIG_MONGODB_URL: "mongodb://root:123456@pumpkinjob-mongodb:27017"
 
   pumpkinjob-server:
     build:
