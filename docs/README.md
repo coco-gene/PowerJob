@@ -58,6 +58,15 @@ docker run -d \
          -e TZ="Asia/Shanghai" \
          -v ~/git/PowerJob/docker/data/pumpkinjob/powerjob:/home/pumpkinjob/powerjob -v ~/.m2:/root/.m2 \
          docker_pumpkinjob-server
+         
+docker run -d \
+         --name powerjob-server \
+         -p 7700:7700 -p 10086:10086 -p 5001:5005 -p 10001:10000 \
+         -e JVMOPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false" \
+         -e PARAMS="--spring.profiles.active=pre" \
+         -e TZ="Asia/Shanghai" \
+         -v ~/docker/powerjob-server:/root/powerjob-server -v ~/.m2:/root/.m2 \
+         docker_pumpkinjob-server
 ```
 
 ```
