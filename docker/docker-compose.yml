@@ -60,7 +60,7 @@ services:
       - "10010:10010"
       - "10001:10000"
     environment:
-      - JVMOPTIONS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+      - JVMOPTIONS=""
       - PARAMS="--spring.profiles.active=daily"
     volumes:
       - ./data/pumpkinjob/powerjob:/home/pumpkinjob/powerjob
@@ -82,7 +82,7 @@ services:
       - "27777:27777"
       - "10002:10000"
     environment:
-      - JVMOPTIONS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+      - JVMOPTIONS=""
       - PARAMS="--app powerjob-agent-test --server pumpkinjob-server:7700"
     volumes:
       - ./data/pumpkinjob/powerjob-agent:/home/pumpkinjob/powerjob-agent
@@ -102,7 +102,7 @@ services:
       - "27778:27777"
       - "10003:10000"
     environment:
-      - JVMOPTIONS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+      - JVMOPTIONS=""
       - PARAMS="--app powerjob-agent-test --server pumpkinjob-server:7700"
     volumes:
       - ./data/pumpkinjob/powerjob-agent1:/home/pumpkinjob/powerjob-agent
