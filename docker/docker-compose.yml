@@ -23,8 +23,8 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - "./data/configdb:/data/configdb"
-      - "./data/db:/data/db"
+      - "./mongodb/configdb:/data/configdb"
+      - "./mongodb/db:/data/db"
     networks:
       - pumpkinjob
     command: mongod --auth
@@ -54,7 +54,7 @@ services:
     environment:
       PARAMS="--spring.profiles.active=daily"
     volumes:
-      - ./pumpkinjob/powerjob:/home/pumpkinjob/powerjob
+      - ./data/pumpkinjob/powerjob:/home/pumpkinjob/powerjob
       - ~/.m2:/root/.m2
       - /etc/localtime:/etc/localtime
     networks:

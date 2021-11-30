@@ -25,7 +25,7 @@ COPY powerjob-server.jar /powerjob-server.jar
 EXPOSE 7700 10086 10010
 # 创建 docker 文件目录
 RUN mkdir -p /home/pumpkinjob/powerjob-server
-RUN mkdir -p /home/pumpkinjob/powerjob
+# RUN mkdir -p /home/pumpkinjob/powerjob
 # 挂载数据卷，将文件直接输出到宿主机（注意，此处挂载的是匿名卷，即在宿主机位置随机）
 VOLUME /home/pumpkinjob/powerjob
 # 启动应用
