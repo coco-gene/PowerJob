@@ -62,7 +62,7 @@ services:
       - "10001:10000"
     environment:
       - JVMOPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
-      - PARAMS="--spring.profiles.active=daily"
+      - PARAMS="--spring.profiles.active=pre"
     volumes:
       - ./data/pumpkinjob/powerjob:/home/pumpkinjob/powerjob
       - ~/.m2:/root/.m2
