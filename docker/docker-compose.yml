@@ -28,12 +28,14 @@ services:
     volumes:
       - "./mongodb/configdb:/data/configdb"
       - "./mongodb/db:/data/db"
+      - /etc/localtime:/etc/localtime
     networks:
       - pumpkinjob
     command: mongod --auth
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root       #初始化管理员用户名和密码
       - MONGO_INITDB_ROOT_PASSWORD=123456
+      - TZ="Asia/Shanghai"
     tty: true
 
   pumpkinjob-mongo-express:
@@ -46,7 +48,9 @@ services:
       - pumpkinjob
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
-      ME_CONFIG_MONGODB_ADMINPASSWORD: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
+    links:
+      - pumpkinjob-mongodb:mongo
 
   pumpkinjob-server:
     build:
