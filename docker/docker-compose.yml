@@ -51,8 +51,11 @@ services:
       - "7700:7700"
       - "10086:10086"
       - "10010:10010"
+    environment:
+      PARAMS="--spring.profiles.active=daily"
     volumes:
       - ./pumpkinjob/powerjob:/home/pumpkinjob/powerjob
+      - ~/.m2:/root/.m2
       - /etc/localtime:/etc/localtime
     networks:
       - pumpkinjob
@@ -63,4 +66,5 @@ services:
 
 networks:
   pumpkinjob:
-    driver: bridge
+    # driver: bridge
+    external: true
