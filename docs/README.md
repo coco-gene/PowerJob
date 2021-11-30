@@ -27,6 +27,8 @@ sudo docker-compose stop pumpkinjob-mongo-express
 sudo docker-compose rm pumpkinjob-mongo-express
 
 sudo docker-compose build pumpkinjob-server
+sudo docker-compose build pumpkinjob-agent
+sudo docker-compose build pumpkinjob-agent1
 
 sudo docker-compose up pumpkinjob-server
 sudo docker-compose up -d pumpkinjob-server
