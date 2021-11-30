@@ -71,6 +71,8 @@ docker run -d \
          docker_pumpkinjob-server
          
 docker rm powerjob-server
+
+docker rmi `docker images|grep none |  awk '{print $3}'`
 ```
 
 ```
