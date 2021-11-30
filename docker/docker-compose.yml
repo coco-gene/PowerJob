@@ -2,7 +2,7 @@ version: '3'
 services:
   pumpkinjob-mysql80:
     image: mysql:8.0
-    container_name: pumpkinjob--mysql
+    container_name: pumpkinjob-mysql
     ports:
       - "3307:3306"
     command:
@@ -21,6 +21,7 @@ services:
 
   pumpkinjob-mongodb:
     image: mongo
+    container_name: pumpkinjob-mongodb
     ports:
       - 27017:27017
     volumes:
@@ -36,6 +37,7 @@ services:
 
   pumpkinjob-mongo-express:
     image: mongo-express
+    container_name: pumpkinjob-mongo-express
     restart: always
     ports:
       - 8081:8081
