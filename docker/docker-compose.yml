@@ -31,7 +31,7 @@ services:
       - /etc/localtime:/etc/localtime
     networks:
       - pumpkinjob
-    command: mongod --auth
+    # command: mongod --auth
     environment:
       - MONGO_INITDB_ROOT_USERNAME=root       #初始化管理员用户名和密码
       - MONGO_INITDB_ROOT_PASSWORD=123456
