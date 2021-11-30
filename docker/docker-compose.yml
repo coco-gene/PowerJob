@@ -4,7 +4,7 @@ services:
     image: mysql:8.0
     container_name: pumpkinjob--mysql
     ports:
-      - "3306:3306"
+      - "3307:3306"
     command:
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
@@ -18,6 +18,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
     restart: always
+
   pumpkinjob-mongodb:
     image: mongo
     ports:
@@ -32,6 +33,7 @@ services:
       - MONGO_INITDB_ROOT_USERNAME=root       #初始化管理员用户名和密码
       - MONGO_INITDB_ROOT_PASSWORD=123456
     tty: true
+
   pumpkinjob-mongo-express:
     image: mongo-express
     restart: always
@@ -42,16 +44,20 @@ services:
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: root
-  pumpkinjob:
+
+  pumpkinjob-server:
     build:
-      context: pumpkinjob-fe
+      context: pumpkinjob
       dockerfile: Dockerfile
-    container_name: pumpkinjob-fe
+    container_name: pumpkinjob-server
     ports:
       - "7700:7700"
       - "10086:10086"
       - "10010:10010"
+      - "5001:5005"
+      - "10001:10000"
     environment:
+      JVMOPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
       PARAMS="--spring.profiles.active=daily"
     volumes:
       - ./data/pumpkinjob/powerjob:/home/pumpkinjob/powerjob
@@ -62,6 +68,48 @@ services:
     depends_on:
       - pumpkinjob-mysql80
       - pumpkinjob-mongodb
+    restart: always
+
+  pumpkinjob-agent:
+    build:
+      context: pumpkinjob-agent
+      dockerfile: Dockerfile
+    container_name: pumpkinjob-agent
+    ports:
+      - "27777:27777"
+      - "5002:5005"
+      - "10002:10000"
+    environment:
+      JVMOPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+      PARAMS="--app powerjob-agent-test --server pumpkinjob-server:7700"
+    volumes:
+      - ./data/pumpkinjob/powerjob-agent:/home/pumpkinjob/powerjob-agent
+      - /etc/localtime:/etc/localtime
+    networks:
+      - pumpkinjob
+    depends_on:
+      - pumpkinjob-server
+    restart: always
+
+  pumpkinjob-agent1:
+    build:
+      context: pumpkinjob-agent
+      dockerfile: Dockerfile
+    container_name: pumpkinjob-agent1
+    ports:
+      - "27778:27777"
+      - "5003:5005"
+      - "10003:10000"
+    environment:
+      JVMOPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+      PARAMS="--app powerjob-agent-test --server pumpkinjob-server:7700"
+    volumes:
+      - ./data/pumpkinjob/powerjob-agent1:/home/pumpkinjob/powerjob-agent
+      - /etc/localtime:/etc/localtime
+    networks:
+      - pumpkinjob
+    depends_on:
+      - pumpkinjob-server
     restart: always
 
 networks:
