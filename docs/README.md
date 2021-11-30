@@ -41,6 +41,7 @@ sudo docker-compose logs -f pumpkinjob-server
 
 mysql -h127.0.0.1 -P3307 -uroot -p
 CREATE DATABASE IF NOT EXISTS `powerjob-daily` DEFAULT CHARSET utf8mb4;
+mysql -h127.0.0.1 -P3307 -uroot -p powerjob-daily < ../others/powerjob-mysql.sql
 
 sudo docker network create --subnet=172.22.0.0/16 pumpkinjob
 ```
