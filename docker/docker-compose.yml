@@ -58,10 +58,9 @@ services:
       - "7700:7700"
       - "10086:10086"
       - "10010:10010"
-      - "5001:5005"
       - "10001:10000"
     environment:
-      - JVMOPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+      - JVMOPTIONS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
       - PARAMS="--spring.profiles.active=daily"
     volumes:
       - ./data/pumpkinjob/powerjob:/home/pumpkinjob/powerjob
@@ -81,10 +80,9 @@ services:
     container_name: pumpkinjob-agent
     ports:
       - "27777:27777"
-      - "5002:5005"
       - "10002:10000"
     environment:
-      - JVMOPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+      - JVMOPTIONS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
       - PARAMS="--app powerjob-agent-test --server pumpkinjob-server:7700"
     volumes:
       - ./data/pumpkinjob/powerjob-agent:/home/pumpkinjob/powerjob-agent
@@ -102,10 +100,9 @@ services:
     container_name: pumpkinjob-agent1
     ports:
       - "27778:27777"
-      - "5003:5005"
       - "10003:10000"
     environment:
-      - JVMOPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+      - JVMOPTIONS="-Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
       - PARAMS="--app powerjob-agent-test --server pumpkinjob-server:7700"
     volumes:
       - ./data/pumpkinjob/powerjob-agent1:/home/pumpkinjob/powerjob-agent
