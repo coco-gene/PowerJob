@@ -5,6 +5,10 @@ mvn package -Dmaven.test.skip=true
 cp powerjob-server/powerjob-server-starter/target/powerjob-server-starter-4.0.1.jar docker/pumpkinjob/powerjob-server.jar
 cp powerjob-worker-agent/target/powerjob-worker-agent-4.0.1.jar docker/pumpkinjob-agent/powerjob-agent.jar
 
+cd docker
+cp -rf ../powerjob-server/powerjob-server-starter/target/*.jar pumpkinjob/powerjob-server.jar
+cp -rf ../powerjob-worker-agent/target/*.jar pumpkinjob-agent/powerjob-agent.jar
+
 sudo docker-compose build
 sudo docker-compose down
 sudo docker-compose up
