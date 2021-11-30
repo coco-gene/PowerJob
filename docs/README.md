@@ -48,7 +48,6 @@ sudo docker network create --subnet=172.22.0.0/16 pumpkinjob
 
 ```
 docker-compose mongo-express
-mongodb://root:123456@localhost/test
 
 mongo --username "root" --password
 123456
