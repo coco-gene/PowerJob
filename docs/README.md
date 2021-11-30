@@ -1,6 +1,7 @@
 ```shell
 mvn package -Dmaven.test.skip=true
 # java -jar --spring.profiles.active=daily
+# java -jar --spring.profiles.active=pre
 
 cp powerjob-server/powerjob-server-starter/target/powerjob-server-starter-4.0.1.jar docker/pumpkinjob/powerjob-server.jar
 cp powerjob-worker-agent/target/powerjob-worker-agent-4.0.1.jar docker/pumpkinjob-agent/powerjob-agent.jar
