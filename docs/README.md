@@ -88,4 +88,6 @@ docker-compose mongo-express
 
 mongo --username "root" --password
 123456
+
+tech.powerjob.official.processors.impl.script.ShellProcessor
 ```
