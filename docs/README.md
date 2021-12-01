@@ -109,6 +109,8 @@ docker rmi `docker images|grep none |  awk '{print $3}'`
 ```
 docker-compose mongo-express
 
+user.home
+
 mongo --username "root" --password
 123456
 
