@@ -64,7 +64,7 @@ services:
       JVMOPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
       PARAM: "--spring.profiles.active=pre"
     volumes:
-      - ./data/pumpkinjob/powerjob:/home/pumpkinjob/powerjob
+      - ./data/pumpkinjob/powerjob:/root/powerjob
       - ~/.m2:/root/.m2
       - /etc/localtime:/etc/localtime
     networks:
@@ -87,7 +87,7 @@ services:
       JVMOPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
       PARAMS: "--app powerjob-agent-test --server pumpkinjob-server:7700"
     volumes:
-      - ./data/pumpkinjob/powerjob-agent:/home/pumpkinjob/powerjob-agent
+      - ./data/pumpkinjob/powerjob-agent:/root/powerjob
       - /etc/localtime:/etc/localtime
     networks:
       - pumpkinjob
@@ -108,7 +108,7 @@ services:
       JVMOPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=10000 -Dcom.sun.management.jmxremote.rmi.port=10000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
       PARAMS: "--app powerjob-agent-test --server pumpkinjob-server:7700"
     volumes:
-      - ./data/pumpkinjob/powerjob-agent1:/home/pumpkinjob/powerjob-agent
+      - ./data/pumpkinjob/powerjob-agent1:/root/powerjob
       - /etc/localtime:/etc/localtime
     networks:
       - pumpkinjob
