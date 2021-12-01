@@ -58,6 +58,17 @@ CREATE DATABASE IF NOT EXISTS `powerjob-pre` DEFAULT CHARSET utf8mb4;
 mysql -h127.0.0.1 -P3307 -uroot -p powerjob-daily < ../others/powerjob-mysql.sql
 mysql -h127.0.0.1 -P3307 -uroot -p powerjob-pre < ../others/powerjob-mysql.sql
 
+select * from app_info;
+select * from container_info;
+select * from instance_info;
+select * from job_info;
+select * from oms_lock;
+select * from server_info;
+select * from user_info;
+select * from workflow_info;
+select * from workflow_instance_info;
+select * from workflow_node_info;
+
 truncate table app_info;
 truncate table container_info;
 truncate table instance_info;
