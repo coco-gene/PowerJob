@@ -58,6 +58,17 @@ CREATE DATABASE IF NOT EXISTS `powerjob-pre` DEFAULT CHARSET utf8mb4;
 mysql -h127.0.0.1 -P3307 -uroot -p powerjob-daily < ../others/powerjob-mysql.sql
 mysql -h127.0.0.1 -P3307 -uroot -p powerjob-pre < ../others/powerjob-mysql.sql
 
+truncate table app_info;
+truncate table container_info;
+truncate table instance_info;
+truncate table job_info;
+truncate table oms_lock;
+truncate table server_info;
+truncate table user_info;
+truncate table workflow_info;
+truncate table workflow_instance_info;
+truncate table workflow_node_info;
+
 sudo docker network create --subnet=172.22.0.0/16 pumpkinjob
 
 
